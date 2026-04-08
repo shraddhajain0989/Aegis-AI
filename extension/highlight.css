@@ -1,0 +1,8 @@
+.aegis-scam-highlight {
+    background-color: #ffcccc !important;
+    color: #990000 !important;
+    border-bottom: 2px dashed #ff0000 !important;
+    cursor: help !important;
+    position: relative !important;
+    font-weight: bold !important;
+}

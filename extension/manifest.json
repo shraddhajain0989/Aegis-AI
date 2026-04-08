@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "AegisAI - Scam Defender",
+  "version": "1.0",
+  "description": "Protects you from human behavior manipulation and scams on the web.",
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "css": ["highlight.css"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
