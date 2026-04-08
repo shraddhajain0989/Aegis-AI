@@ -20,7 +20,7 @@ dependencies = [
 ]
 
 [project.scripts]
-server = "app:start"
+server = "server.app:main"
 
 [project.entry-points."openenv.environments"]
 scam-defense-env = "env:ScamDefenseEnv"

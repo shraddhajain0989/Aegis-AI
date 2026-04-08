@@ -29,9 +29,9 @@ async def step(action: Action):
 async def state():
     return await env.state()
 
-def start():
+def main():
     import uvicorn
-    uvicorn.run("app:app", host="0.0.0.0", port=7860)
+    uvicorn.run("server.app:app", host="0.0.0.0", port=7860)
 
 if __name__ == "__main__":
-    start()
+    main()
