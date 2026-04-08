@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aegis-ai"
+version = "0.1.0"
+description = "AegisAI Scam Defense Environment"
+authors = [
+    {name = "AegisAI"}
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pydantic",
+    "openai",
+    "fastapi",
+    "uvicorn"
+]
