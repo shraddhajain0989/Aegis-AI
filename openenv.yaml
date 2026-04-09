@@ -3,18 +3,48 @@ name: scam-defense-env
 description: AI environment to detect scams and protect users
 
 tasks:
-  - id: easy
-    name: "Easy Scam Defense"
-    description: "Detect an obvious scam message"
+  - id: easy_1
+    name: "Easy Scam 1"
+    description: "Detect an obvious lottery scam."
     difficulty: easy
     grader: "grader:compute_score"
-  - id: medium
-    name: "Medium Scam Defense"
-    description: "Detect a well-crafted scam message"
+  - id: easy_2
+    name: "Easy Scam 2"
+    description: "Detect a gift card scam."
+    difficulty: easy
+    grader: "grader:compute_score"
+  - id: easy_3
+    name: "Easy Scam 3"
+    description: "Detect a free trip scam."
+    difficulty: easy
+    grader: "grader:compute_score"
+  - id: medium_1
+    name: "Medium Scam 1"
+    description: "Detect a bank verification scam."
     difficulty: medium
     grader: "grader:compute_score"
-  - id: hard
-    name: "Hard Scam Defense"
-    description: "Detect an advanced social engineering attempt"
+  - id: medium_2
+    name: "Medium Scam 2"
+    description: "Detect a KYC suspension scam."
+    difficulty: medium
+    grader: "grader:compute_score"
+  - id: medium_3
+    name: "Medium Scam 3"
+    description: "Detect an electricity bill scam."
+    difficulty: medium
+    grader: "grader:compute_score"
+  - id: hard_1
+    name: "Hard Scam 1"
+    description: "Detect an HR impersonator scam."
+    difficulty: hard
+    grader: "grader:compute_score"
+  - id: hard_2
+    name: "Hard Scam 2"
+    description: "Detect a fake failed order scam."
+    difficulty: hard
+    grader: "grader:compute_score"
+  - id: hard_3
+    name: "Hard Scam 3"
+    description: "Detect a fake police impersonation scam."
     difficulty: hard
     grader: "grader:compute_score"

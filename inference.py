@@ -106,65 +106,72 @@ async def main():
 
     client = OpenAI(base_url=API_BASE_URL, api_key=API_KEY or "dummy_key_to_prevent_crash")
 
-    env = await MyEnvV4Env.from_docker_image(None)
+    tasks_to_run = [
+        "easy_1", "easy_2", "easy_3",
+        "medium_1", "medium_2", "medium_3",
+        "hard_1", "hard_2", "hard_3"
+    ]
 
-    rewards: List[float] = []
-    steps_taken = 0
-    success = False
-    score = 0.0
+    for task_name in tasks_to_run:
+        env = MyEnvV4Env(task=task_name)
 
-    log_start(task=TASK_NAME, env=BENCHMARK, model=MODEL_NAME)
+        rewards: List[float] = []
+        steps_taken = 0
+        success = False
+        score = 0.0
 
-    try:
-        result = await env.reset()
-        obs = result.observation
+        log_start(task=task_name, env=BENCHMARK, model=MODEL_NAME)
 
-        for step in range(1, MAX_STEPS + 1):
-
-            message = obs.message
-
-            # ✅ Use API action (with safe fallback)
-            action_str = await get_model_action(client, message)
-
-            result = await env.step(MyEnvV4Action(action=action_str))
-
-            obs = result.observation
-            reward = result.reward or 0.0
-            done = result.done
-
-            rewards.append(reward)
-            steps_taken = step
-
-            log_step(
-                step=step,
-                action=action_str,
-                reward=reward,
-                done=done,
-                error=None,
-            )
-
-            if done:
-                break
-
-        # -------------------------------
-        # SCORE CALCULATION
-        # -------------------------------
-
-        total_reward = sum(rewards)
-        max_possible = len(rewards) * 1.0 if rewards else 1.0
-
-        score = total_reward / max_possible
-        score = max(0.01, min(0.99, score))
-
-        success = score >= SUCCESS_SCORE_THRESHOLD
-
-    finally:
         try:
-            await env.close()
-        except Exception:
-            pass
+            result = await env.reset()
+            obs = result.observation
 
-        log_end(success=success, steps=steps_taken, score=score, rewards=rewards)
+            for step in range(1, MAX_STEPS + 1):
+
+                message = obs.message
+
+                # ✅ Use API action (with safe fallback)
+                action_str = await get_model_action(client, message)
+
+                result = await env.step(MyEnvV4Action(action=action_str))
+
+                obs = result.observation
+                reward = result.reward or 0.0
+                done = result.done
+
+                rewards.append(reward)
+                steps_taken = step
+
+                log_step(
+                    step=step,
+                    action=action_str,
+                    reward=reward,
+                    done=done,
+                    error=None,
+                )
+
+                if done:
+                    break
+
+            # -------------------------------
+            # SCORE CALCULATION
+            # -------------------------------
+
+            total_reward = sum(rewards)
+            max_possible = len(rewards) * 1.0 if rewards else 1.0
+
+            score = total_reward / max_possible
+            score = max(0.01, min(0.99, score))
+
+            success = score >= SUCCESS_SCORE_THRESHOLD
+
+        finally:
+            try:
+                await env.close()
+            except Exception:
+                pass
+
+            log_end(success=success, steps=steps_taken, score=score, rewards=rewards)
 
 
 if __name__ == "__main__":
