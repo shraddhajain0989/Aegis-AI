@@ -154,7 +154,7 @@ async def main():
         max_possible = len(rewards) * 1.0 if rewards else 1.0
 
         score = total_reward / max_possible
-        score = max(0.0, min(1.0, score))
+        score = max(0.01, min(0.99, score))
 
         success = score >= SUCCESS_SCORE_THRESHOLD
 

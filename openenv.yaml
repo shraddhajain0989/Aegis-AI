@@ -2,6 +2,9 @@ name: scam-defense-env
 description: AI environment to detect scams and protect users
 
 tasks:
-  - easy
-  - medium
-  - hard
+  - id: easy
+    grader: "grader:compute_score"
+  - id: medium
+    grader: "grader:compute_score"
+  - id: hard
+    grader: "grader:compute_score"

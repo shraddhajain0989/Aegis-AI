@@ -24,3 +24,8 @@ server = "server.app:main"
 
 [project.entry-points."openenv.environments"]
 scam-defense-env = "env:ScamDefenseEnv"
+
+[project.entry-points."openenv.graders"]
+easy = "grader:compute_score"
+medium = "grader:compute_score"
+hard = "grader:compute_score"
