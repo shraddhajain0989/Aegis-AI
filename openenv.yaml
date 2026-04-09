@@ -3,8 +3,17 @@ description: AI environment to detect scams and protect users
 
 tasks:
   - id: easy
+    name: "Easy Scam Defense"
+    description: "Detect an obvious scam message"
+    difficulty: easy
     grader: "grader:compute_score"
   - id: medium
+    name: "Medium Scam Defense"
+    description: "Detect a well-crafted scam message"
+    difficulty: medium
     grader: "grader:compute_score"
   - id: hard
+    name: "Hard Scam Defense"
+    description: "Detect an advanced social engineering attempt"
+    difficulty: hard
     grader: "grader:compute_score"
